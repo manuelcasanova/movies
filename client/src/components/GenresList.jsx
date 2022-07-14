@@ -14,9 +14,6 @@ export default function GenresList ({genres}) {
           <th>Title</th>
           <th>Edit</th>
           <th>Delete</th>
-          <th>Imdb</th>
-          <th>Edit</th>
-          <th>Delete</th>
         </tr>
       </thead>
 
