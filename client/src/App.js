@@ -11,11 +11,19 @@ import axios from 'axios';
 function App() {
 
   const [ movies, setMovies ] = useState([]);
+  const [ genres, setGenres ] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:8001/movies`)
     .then(function (res) {
       setMovies([...res.data])
+    })
+  }, [])
+
+  useEffect(() => {
+    axios.get(`http://localhost:8001/genres`)
+    .then(function (res) {
+      setGenres([...res.data])
     })
   }, [])
 
@@ -26,7 +34,7 @@ function App() {
       <NewGenre />
       </div>
       <MoviesList movies={movies}/>
-      <GenresList />
+      <GenresList genres={genres}/>
     </div>
   );
 }
