@@ -18,7 +18,7 @@ function App() {
     .then(function (res) {
       setMovies([...res.data])
     })
-  }, [])
+  }, [genres])
 
   useEffect(() => {
     axios.get(`http://localhost:8001/genres`)
@@ -34,7 +34,7 @@ function App() {
       <NewGenre />
       </div>
       <MoviesList movies={movies} setMovies={setMovies}/>
-      <GenresList genres={genres} setGenres={setGenres}/>
+      <GenresList genres={genres} setGenres={setGenres} setMovies={setMovies}/>
     </div>
   );
 }
