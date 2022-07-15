@@ -81,3 +81,16 @@ app.post("/movies", async (req, res) => {
     console.error(err.message)
   }
 })
+
+//Add a genre
+
+app.post("/genres", async (req, res) => {
+  try {
+    const {genre_title} = req.body;
+    console.log("reqb body", req.body)
+    const newGenre = await pool.query("INSERT INTO genres (genre_title) VALUES($1) RETURNING *", [genre_title])
+    res.json(newGenre.rows[0])
+  } catch (err) {
+    console.error(err.message)
+  }
+})
