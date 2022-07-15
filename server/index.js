@@ -108,3 +108,17 @@ app.put("/movies/:id", async (req, res) => {
     console.error(err.message)
   }
 })
+
+//Edit a genre
+
+app.put("/genres/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      genre_title } = req.body
+      const editGenre = await pool.query('UPDATE genres SET genre_title = $1 WHERE genre_id = $2', [genre_title, id])
+      res.json("Genre was updated")
+  } catch (err) {
+    console.error(err.message)
+  }
+})
