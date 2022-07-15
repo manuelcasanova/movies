@@ -38,7 +38,7 @@ export default function MoviesList ({movies, setMovies, genres}) {
             <td>{movie.movie_title}</td>
             <td>{movie.movie_year}</td>
             <td>{movie.genre_title}</td>
-            <td>{movie.movie_imdb}</td>
+            <td><a href={movie.movie_imdb} target="_blank">View</a></td>
             <td><EditMovies movie={movie} genres={genres} movies={movies} setMovies={setMovies}/></td>
             <td><button
             className="button_delete"
