@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function EditMovies ({ movie, genres }) {
+export default function EditMovies ({ movie, genres, movies, setMovies }) {
 
   const [movie_title, setMovieTitle] = useState(movie.movie_title);
   const [movie_year, setMovieYear] = useState(movie.movie_year);
@@ -16,6 +16,18 @@ const editMovie = async (e) => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(body)
     })
+
+    const editedMovie = {...body, movie_id: movie.movie_id}
+
+    const updatedMovies = movies.map((movie) => {
+      if (movie.movie_id !== editedMovie.movie_id) {
+        return movie
+      } else {
+        return {...movie, ...editedMovie}
+      }
+    })
+setMovies(updatedMovies)
+
   } catch (err) {
     console.error(err.message)
   }

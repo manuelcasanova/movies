@@ -39,7 +39,7 @@ export default function MoviesList ({movies, setMovies, genres}) {
             <td>{movie.movie_year}</td>
             <td>{movie.genre_title}</td>
             <td>{movie.movie_imdb}</td>
-            <td><EditMovies movie={movie} genres={genres}/></td>
+            <td><EditMovies movie={movie} genres={genres} movies={movies} setMovies={setMovies}/></td>
             <td><button
             className="button_delete"
             onClick={() => deleteMovie(movie.movie_id)}
