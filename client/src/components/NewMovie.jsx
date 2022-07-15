@@ -1,12 +1,52 @@
-import { useState } from "react"
-import GenresList from "./GenresList";
+import { useState, useEffect } from "react"
+import axios from 'axios';
 
-export default function NewMovie({ movies, genres }) {
+export default function NewMovie({ movies, genres, setMovies }) {
 
   const [movie_title, setMovieTitle] = useState("");
-  const [movie_year, setMovieYear] = useState();
+  const [movie_year, setMovieYear] = useState(19);
   const [movie_genre_id, setMovieGenre] = useState("");
   const [movie_imdb, setMovieImdb] = useState("");
+
+  useEffect (() => {
+    const foundGenre = genres.find((genre) => {
+      return genre.level_id === movie_genre_id
+    })
+    if (!foundGenre && genres.length) {
+      setMovieGenre(genres[0].genre_id)
+    }
+  }, [genres])
+
+  function onSubmitForm(e) {
+    e.preventDefault();
+    const movie = {
+      movie_title,
+      movie_year,
+      movie_genre_id,
+      movie_imdb
+    }
+    addMovie(movie);
+    resetForm();
+  }
+
+  function addMovie(movie) {
+    console.log("Movie added:", movie)
+
+    return axios.post(`http://localhost:8001/movies`, movie)
+    .then((response) => {
+      const newMovie = response.data;
+      const movieGenre = genres.find((genre) => {
+        return genre.genre_id === newMovie.movie_genre_id
+      })
+      newMovie.genre_title = movieGenre.genre_title;
+      setMovies([newMovie, ...movies])
+    })
+  }
+
+  function resetForm() {
+    setMovieTitle("");
+    setMovieImdb("");
+  }
 
 
   return (
@@ -76,6 +116,7 @@ export default function NewMovie({ movies, genres }) {
               <button
                 className="button_submit"
                 type="Submit"
+                onClick={onSubmitForm}
                 data-dismiss="modal"
               >Add movie</button>
             </div>

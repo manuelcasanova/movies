@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <div className="add_movie_and_genre">
-      <NewMovie movies={movies} genres={genres}/>
+      <NewMovie movies={movies} genres={genres} setMovies={setMovies}/>
       <NewGenre />
       </div>
       <MoviesList movies={movies} setMovies={setMovies}/>
