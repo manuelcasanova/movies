@@ -3,10 +3,10 @@ require('dotenv').config()
 const Pool = require('pg').Pool;
 
 const pool = new Pool({
-  user: process.env.USER,
-  host: 'localhost',
-  database: 'movies',
-  password: process.env.PASSWORD,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DATABASE,
+  password: process.env.DB_PASSWORD,
   port: 5432
 })
 
